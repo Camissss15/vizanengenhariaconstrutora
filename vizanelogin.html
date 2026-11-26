@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="vizanelogin.css">
+
+    <title>Login Administrativo | Vizan Engenharia</title>
+</head>
+
+<body>
+
+    <main class="pagina-login">
+
+        <!-- Fundo decorativo -->
+        <div class="fundo-decorativo"></div>
+
+        <!-- Cabeçalho -->
+        <header class="cabecalho-login">
+            <a href="vizane.html" aria-label="Voltar ao site principal">
+                <img src="VIZAN.jpg.png" alt="Vizan Engenharia e Construtora">
+            </a>
+
+            <a href="vizane.html" class="link-voltar">
+                ← Voltar ao site
+            </a>
+        </header>
+
+        <!-- Formulário de login -->
+        <section class="area-login">
+
+            <div class="login-card">
+
+                <div class="login-marca">
+                    <span class="linha-decorativa"></span>
+                    <p>ÁREA RESTRITA</p>
+                </div>
+
+                <h1>Acesso Administrativo</h1>
+
+                <p class="login-descricao">
+                    Entre com suas credenciais para acessar
+                    o painel de gerenciamento do site.
+                </p>
+                <p id="loginErro" class="login-erro" role="alert" hidden>
+                    Usuário ou senha inválidos. Confira os dados e tente novamente.
+                </p>
+
+                <form name="login" method="POST" action="login.php">
+
+                    <div class="campo-login">
+                        <label for="login">Usuário</label>
+
+                        <input
+                            type="text"
+                            id="login"
+                            name="login"
+                            placeholder="Digite seu usuário"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo-login">
+                        <label for="senha">Senha</label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        Entrar no painel
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <button type="reset" class="btn-cancelar">
+                        Limpar campos
+                    </button>
+
+                </form>
+
+                <div class="login-aviso">
+                    <span aria-hidden="true">🔒</span>
+                    <p>
+                        Acesso exclusivo para administradores autorizados.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="rodape-login">
+            <p>
+                &copy; 2026 Vizan Engenharia e Construtora.
+                Todos os direitos reservados.
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("erro")) {
+            document.getElementById("loginErro").hidden = false;
+        }
+    </script>
+</body>
+</html>

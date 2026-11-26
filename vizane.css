@@ -1,0 +1,1077 @@
+/* ===================================================
+   RESET E CONFIGURAÇÕES GERAIS
+   =================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #ffffff;
+    color: #212529;
+    line-height: 1.6;
+}
+
+/* Container ajustado para aproximar o menu das bordas */
+.interface {
+    max-width: 98%; /* Ocupa quase a largura total para aproximar das bordas */
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* ===================================================
+   VARIÁVEIS DE CORES (PALETA VIZAN ENGENHARIA)
+   =================================================== */
+:root {
+    --cor-principal: #0b2545;       /* Azul Marinho Nobre */
+    --cor-secundaria: #f0a500;      /* Amarelo Ouro / Construção */
+    --cor-secundaria-hover: #d48f00;
+    --cor-texto-escuro: #1d2d44;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-suave: #6c757d;
+    --cor-texto-suave-azul: #cbd5e1;
+    --fundo-claro: #ffffff;
+    --fundo-cinza-leve: #f8fafc;
+}
+
+/* ===================================================
+   1. TELA PRINCIPAL / HOME (AZUL / ESCURA)
+   =================================================== */
+.inicio {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.imagem-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.degrade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(11, 37, 69, 0.92) 0%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: -1;
+}
+
+/* Header & Menu */
+header {
+    padding: 20px 0;
+}
+
+header .interface {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 19px;
+}
+
+/* LOGO MAIOR */
+.logo img {
+    max-height: 70px; /* Logo aumentada */
+    width: auto;
+    display: block;
+    margin-right: -1px;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 2rem;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#menu {
+    display: none;
+}
+
+/* Menu Desktop em linha horizontal perfeita */
+.menu-desktop ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 25px; 
+}
+
+.menu-desktop ul li {
+    white-space: nowrap; /* Garante que o texto fique em uma única linha horizontal */
+}
+
+/* BOTÕES DO MENU MAIORES */
+.menu-desktop ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem; /* Fonte maior */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.menu-desktop ul li a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* Botão Solicitar Orçamento */
+.btn-solicitarorc button {
+    padding: 14px 28px;
+    background-color: var(--cor-secundaria);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.95rem; /* Botão maior */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.3);
+    white-space: nowrap;
+}
+
+.btn-solicitarorc button:hover {
+    background-color: var(--cor-secundaria-hover);
+    transform: translateY(-2px);
+}
+
+/* Conteúdo da Hero Banner (Espaçamento de 3px do canto esquerdo) */
+.conteudo {
+    max-width: 1200px;
+    margin: 0 auto 0 0;
+    padding-top: 100px;          
+    padding-left: 80px;           /* <--- ESPAÇAMENTO DE 3PX */
+    padding-right: 20px;
+    padding-bottom: 80px;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.conteudo h1 {
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.conteudo p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    color: #e2e8f0;
+    font-weight: 300;
+}
+
+/* ===================================================
+   ESTILOS DE TÍTULO PARA SEÇÕES
+   =================================================== */
+section {
+    padding: 100px 0;
+}
+
+.titulo-secao {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.titulo-secao h2 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.titulo-secao h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
+}
+
+.secao-branca .titulo-secao h2 {
+    color: var(--cor-principal);
+}
+
+.secao-azul .titulo-secao h2 {
+    color: var(--cor-texto-claro);
+}
+
+/* ===================================================
+   2. QUEM SOMOS (SEÇÃO BRANCA)
+   =================================================== */
+#quem-somos {
+    background-color: var(--fundo-claro);
+}
+
+.quem-somos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.quem-somos-texto p {
+    font-size: 1.05rem;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 20px;
+}
+
+.estatisticas {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.estatistica-item h3 {
+    font-size: 2.2rem;
+    color: var(--cor-secundaria);
+    font-weight: 800;
+}
+
+.estatistica-item p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--cor-texto-suave);
+}
+
+.quem-somos-card {
+    background: var(--fundo-cinza-leve);
+    padding: 40px;
+    border-left: 5px solid var(--cor-principal);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.quem-somos-card h3 {
+    color: var(--cor-principal);
+    margin-bottom: 15px;
+}
+
+.quem-somos-card p {
+    color: var(--cor-texto-escuro);
+}
+
+/* ===================================================
+   3. SERVIÇOS (SEÇÃO AZUL)
+   =================================================== */
+#servicos {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.servico-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.servico-card:hover {
+    transform: translateY(-8px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.servico-icone {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.servico-card h3 {
+    font-size: 1.3rem;
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.servico-card p {
+    color: var(--cor-texto-suave-azul);
+    font-size: 0.95rem;
+}
+
+/* ===================================================
+   4. PROJETOS (SEÇÃO BRANCA)
+   =================================================== */
+#projetos {
+    background-color: var(--fundo-claro);
+}
+
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.projeto-card {
+    background-color: var(--fundo-cinza-leve);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+}
+
+.projeto-card:hover {
+    transform: translateY(-5px);
+}
+
+.projeto-info {
+    padding: 25px;
+}
+
+.projeto-info span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cor-secundaria);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.projeto-info h3 {
+    font-size: 1.25rem;
+    color: var(--cor-principal);
+    margin: 8px 0;
+}
+
+.projeto-info p {
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+}
+
+/* ===================================================
+   5. ONDE ESTAMOS (SEÇÃO AZUL - PENÚLTIMA)
+   =================================================== */
+#onde-estamos {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+
+.onde-estamos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-item span {
+    font-size: 1.5rem;
+}
+
+.info-item h4 {
+    color: var(--cor-secundaria);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    color: var(--cor-texto-suave-azul);
+    font-size: 0.95rem;
+}
+
+.mapa-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 50px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.mapa-box h3 {
+    margin-bottom: 15px;
+    color: var(--cor-secundaria);
+}
+
+.mapa-box p {
+    color: var(--cor-texto-suave-azul);
+}
+
+/* ===================================================
+   6. CONTATO & ORÇAMENTO (SEÇÃO AZUL - ÚLTIMA)
+   =================================================== */
+#contato {
+    background-color: #07192e;
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contato-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+.form-grupo input,
+.form-grupo textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--cor-texto-escuro);
+}
+
+.form-grupo textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.btn-enviar {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--cor-secundaria);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background-color: var(--cor-secundaria-hover);
+}
+
+/* ===================================================
+   RESPONSIVIDADE (MOBILE / TABLETS)
+   =================================================== */
+/* ===================================================
+   RESPONSIVIDADE (MOBILE / TABLETS)
+   =================================================== */
+@media (max-width: 1024px) {
+    .menu-desktop ul {
+        gap: 15px;
+    }
+
+    .menu-desktop ul li a {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Cabeçalho como referência para o menu */
+    header {
+        position: relative;
+        z-index: 1000;
+    }
+
+    header .interface {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Ícone do menu hamburguer */
+    .menu-icon {
+        display: block;
+        color: #ffffff;
+        font-size: 2rem;
+        cursor: pointer;
+        line-height: 1;
+        padding: 5px 10px;
+        z-index: 1002;
+        user-select: none;
+    }
+
+    /* Checkbox invisível, mas funcional */
+    #menu {
+        display: none;
+    }
+
+    /* Menu fechado por padrão */
+    .menu-desktop {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--cor-principal);
+        padding: 20px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
+    }
+
+    /* Links organizados na vertical */
+    .menu-desktop ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        list-style: none;
+    }
+
+    .menu-desktop ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu-desktop ul li a {
+        display: block;
+        padding: 8px 10px;
+        font-size: 1rem;
+        color: #ffffff;
+        text-decoration: none;
+        white-space: normal;
+    }
+
+    .menu-desktop ul li a:hover {
+        color: var(--cor-secundaria);
+    }
+
+    /* Abre o menu quando o checkbox está marcado */
+    #menu:checked ~ .menu-desktop {
+        display: block;
+    }
+
+    /* Oculta o botão original no cabeçalho mobile */
+    .btn-solicitarorc {
+        display: none;
+    }
+
+    /* Exibe o botão adicional de orçamento no menu mobile */
+    .orcamento-mobile {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .menu-desktop ul li.orcamento-mobile a {
+        display: inline-block;
+        width: auto;
+        padding: 12px 20px;
+        background-color: var(--cor-secundaria);
+        color: #ffffff;
+        border-radius: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    .menu-desktop ul li.orcamento-mobile a:hover {
+        background-color: var(--cor-secundaria-hover);
+        color: #ffffff;
+    }
+
+    /* Ajustes do conteúdo principal */
+    .conteudo {
+        padding-top: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .conteudo h1 {
+        font-size: 2.2rem;
+    }
+
+    .quem-somos-grid,
+    .onde-estamos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Botão de orçamento oculto fora do menu mobile */
+.orcamento-mobile {
+    display: none;
+}
+/* =========================
+   IMAGENS 
+========================= */
+
+/* Deixa esta regra somente para imagens
+   que não sejam a imagem de fundo */
+
+img:not(.imagem-fundo) {
+    max-width: 100%;
+    height: auto;
+}
+
+
+#menu{
+    display: none;
+}
+
+
+/* =========================================
+   7. RODAPÉ - VIZAN ENGENHARIA
+   ========================================= */
+
+.rodape {
+    background-color: #07192e;
+    color: #ffffff;
+    padding: 60px 0 0;
+    border-top: 4px solid var(--cor-secundaria);
+}
+
+/* Organização das colunas */
+
+.rodape-conteudo {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    gap: 50px;
+    padding-bottom: 45px;
+}
+
+/* Logo e descrição */
+
+.rodape-logo {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.rodape-logo img {
+    max-width: 200px;
+    max-height: 85px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.rodape-marca p {
+    max-width: 350px;
+    color: var(--cor-texto-suave-azul);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* Títulos */
+
+.rodape h3 {
+    color: var(--cor-secundaria);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.rodape h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
+}
+
+/* Links rápidos */
+
+.rodape-links ul {
+    list-style: none;
+}
+
+.rodape-links ul li {
+    margin-bottom: 10px;
+}
+
+.rodape-links ul li a {
+    color: var(--cor-texto-suave-azul);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease,
+                padding-left 0.3s ease;
+}
+
+.rodape-links ul li a:hover {
+    color: var(--cor-secundaria);
+    padding-left: 6px;
+}
+
+/* Informações de contato */
+
+.rodape-contato p {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--cor-texto-suave-azul);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.rodape-contato p span {
+    flex-shrink: 0;
+}
+
+.rodape-contato p a {
+    color: var(--cor-texto-suave-azul);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.rodape-contato p a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* Botão de orçamento */
+
+.rodape-botao {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    background-color: var(--cor-secundaria);
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: background-color 0.3s ease,
+                transform 0.3s ease;
+}
+
+.rodape-botao:hover {
+    background-color: var(--cor-secundaria-hover);
+    transform: translateY(-2px);
+}
+
+/* Faixa inferior */
+
+.rodape-final {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.rodape-final p {
+    color: #aebdce;
+    font-size: 0.8rem;
+}
+
+.rodape-final a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.rodape-final a:hover {
+    color: #ffffff;
+}
+
+/* =========================================
+   RESPONSIVIDADE DO RODAPÉ
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .rodape {
+        padding-top: 45px;
+    }
+
+    .rodape-conteudo {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px 25px;
+        padding-bottom: 35px;
+    }
+
+    .rodape-marca {
+        grid-column: 1 / -1;
+    }
+
+    .rodape-marca p {
+        max-width: 100%;
+    }
+
+    .rodape-logo img {
+        max-width: 180px;
+    }
+
+    .rodape-final {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .rodape-conteudo {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .rodape-marca {
+        grid-column: auto;
+    }
+
+    .rodape h3 {
+        margin-bottom: 18px;
+    }
+
+    .rodape-final {
+        padding: 20px 5px;
+    }
+
+    .rodape-final p {
+        font-size: 0.75rem;
+    }
+}
+
+
+/* Rolagem suave ao clicar no menu */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estado inicial */
+.animar-secao {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+/* Estado após entrar na tela */
+.animar-secao.secao-visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Respeita a preferência por menos animações */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .animar-secao {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Ações do rodapé */
+.rodape-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Link para voltar ao topo */
+.rodape-voltar {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.rodape-voltar:hover {
+    color: #ffffff;
+}
+
+/* Botão de login administrativo */
+.rodape-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+
+    background-color: transparent;
+    color: var(--cor-secundaria);
+
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 5px;
+
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.rodape-login:hover {
+    background-color: var(--cor-secundaria);
+    color: #07192e;
+    transform: translateY(-2px);
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+    .rodape-final {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .rodape-acoes {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .rodape-login {
+        width: fit-content;
+    }
+}
+
+
+/* ===================================================
+   ORÇAMENTO — CAIXA CENTRALIZADA
+   =================================================== */
+#contato {
+    background: linear-gradient(135deg, #0b2545 0%, #07192e 100%);
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 100px 0;
+    scroll-margin-top: 20px;
+}
+#contato .titulo-secao h2 { color: #fff; }
+.contato-form-container {
+    width: calc(100% - 30px);\n    max-width: 750px;
+    margin: 0 auto;
+    padding: 45px;
+    background: #fff;
+    color: var(--cor-texto-escuro);
+    border-radius: 12px;
+    border-top: 5px solid var(--cor-secundaria);
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+.contato-descricao { text-align: center; margin-bottom: 32px; }
+.contato-descricao h3 {
+    color: var(--cor-principal);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.contato-descricao p {
+    color: var(--cor-texto-suave);
+    font-size: .95rem;
+    line-height: 1.7;
+}
+#formOrcamento .form-grupo { margin-bottom: 18px; }
+#formOrcamento .form-grupo input,
+#formOrcamento .form-grupo textarea {
+    width: 100%;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #dce3eb;
+    border-radius: 6px;
+    color: var(--cor-texto-escuro);
+    font-size: .95rem;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+#formOrcamento .form-grupo input:focus,
+#formOrcamento .form-grupo textarea:focus {
+    border-color: var(--cor-secundaria);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(240,165,0,.13);
+}
+#formOrcamento .form-grupo textarea { min-height: 140px; resize: vertical; }
+#formOrcamento .form-grupo input::placeholder,
+#formOrcamento .form-grupo textarea::placeholder { color: #8994a3; }
+#formOrcamento .btn-enviar {
+    width: 100%;
+    padding: 16px;
+    background: var(--cor-secundaria);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    font-size: .95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .25s;
+}
+#formOrcamento .btn-enviar:hover {
+    background: var(--cor-secundaria-hover);
+    transform: translateY(-2px);
+}
+#retornoOrcamento { margin-top: 14px; text-align: center; font-size: .9rem; }
+#retornoOrcamento.sucesso { color: #187442; }
+#retornoOrcamento.erro { color: #b42318; }
+.campo-armadilha {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+}
+@media (max-width: 768px) {
+    #contato { padding: 65px 0; }
+    .contato-form-container { padding: 30px 22px; }
+    .contato-descricao h3 { font-size: 1.25rem; }
+    .contato-descricao p { font-size: .88rem; }
+}
+@media (max-width: 480px) {
+    .contato-form-container { padding: 25px 18px; }
+    .contato-descricao { margin-bottom: 24px; }
+}
