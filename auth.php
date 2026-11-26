@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-// Configuração e inicialização da sessão.
 if (session_status() !== PHP_SESSION_ACTIVE) {
     $https = (
         !empty($_SERVER["HTTPS"]) &&
         $_SERVER["HTTPS"] !== "off"
     );
+
+    ini_set("session.use_strict_mode", "1");
 
     session_set_cookie_params([
         "lifetime" => 0,
@@ -19,12 +20,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-// Token de segurança CSRF.
 if (empty($_SESSION["csrf_token"])) {
     $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
 }
 
-// Verifica se o usuário está autenticado.
 function exigir_login(): void
 {
     if (empty($_SESSION["usuario_id"])) {
@@ -33,14 +32,11 @@ function exigir_login(): void
     }
 }
 
-// Como não existe nível de acesso no banco,
-// todos os usuários autenticados têm as mesmas permissões.
 function exigir_admin(): void
 {
     exigir_login();
 }
 
-// Validação de segurança para requisições POST.
 function validar_csrf(): void
 {
     $token = $_SERVER["HTTP_X_CSRF_TOKEN"] ?? "";
