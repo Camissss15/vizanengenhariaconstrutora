@@ -5,22 +5,11 @@ require_once __DIR__ . "/auth.php";
 
 exigir_login();
 
-// Dados da sessão.
 $nomeBruto = (string)($_SESSION["usuario_nome"] ?? "Usuário");
-
 $emailBruto = (string)($_SESSION["usuario_email"] ?? "");
 
-$nome = htmlspecialchars(
-    $nomeBruto,
-    ENT_QUOTES,
-    "UTF-8"
-);
-
-$email = htmlspecialchars(
-    $emailBruto,
-    ENT_QUOTES,
-    "UTF-8"
-);
+$nome = htmlspecialchars($nomeBruto, ENT_QUOTES, "UTF-8");
+$email = htmlspecialchars($emailBruto, ENT_QUOTES, "UTF-8");
 
 $inicial = htmlspecialchars(
     mb_substr($nomeBruto, 0, 1, "UTF-8"),
@@ -43,17 +32,14 @@ $csrf = htmlspecialchars(
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="csrf-token" content="<?= $csrf ?>">
-
-<meta name="vizan-admin" content="1">
+<meta name="vizan-user" content="<?= (int)($_SESSION["usuario_id"] ?? 0) ?>">
 
 <title>Painel Administrativo | Vizan Engenharia</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -264,42 +250,30 @@ $csrf = htmlspecialchars(
                     <h3>O que deseja fazer?</h3>
 
                     <button class="quick-action" data-go="conteudo">
-
                         <span>▧</span>
-
                         <div>
                             <b>Atualizar o site</b>
                             <small>Descrições e imagens</small>
                         </div>
-
                         <i>→</i>
-
                     </button>
 
                     <button class="quick-action" data-go="orcamentos">
-
                         <span>✉</span>
-
                         <div>
                             <b>Ver orçamentos</b>
                             <small>Acompanhar novos contatos</small>
                         </div>
-
                         <i>→</i>
-
                     </button>
 
                     <button class="quick-action" data-go="usuarios">
-
                         <span>♙</span>
-
                         <div>
                             <b>Gerenciar acessos</b>
                             <small>Cadastro e remoção de usuários</small>
                         </div>
-
                         <i>→</i>
-
                     </button>
 
                 </article>
@@ -343,12 +317,10 @@ $csrf = htmlspecialchars(
                         </label>
 
                         <select id="sectionSelect">
-
                             <option>Quem Somos</option>
                             <option>Serviços</option>
                             <option>Projetos</option>
                             <option>Onde Estamos</option>
-
                         </select>
 
                         <label for="descriptionText">
@@ -400,7 +372,7 @@ $csrf = htmlspecialchars(
                             Descrição da imagem
                         </label>
 
-                        <input id="imageAlt" required>
+                        <input id="imageAlt" required maxlength="180">
 
                         <button class="primary-btn admin-only" type="submit">
                             Enviar imagem
@@ -457,12 +429,10 @@ $csrf = htmlspecialchars(
                     >
 
                     <select id="quoteFilter">
-
                         <option value="">Todos os status</option>
                         <option>Pendente</option>
                         <option>Em análise</option>
                         <option>Respondido</option>
-
                     </select>
 
                 </div>
@@ -472,7 +442,6 @@ $csrf = htmlspecialchars(
                     <table>
 
                         <thead>
-
                             <tr>
                                 <th>Cliente / contato</th>
                                 <th>Assunto / mensagem</th>
@@ -480,7 +449,6 @@ $csrf = htmlspecialchars(
                                 <th>Status</th>
                                 <th>Ação</th>
                             </tr>
-
                         </thead>
 
                         <tbody id="quotesTable"></tbody>
@@ -526,14 +494,12 @@ $csrf = htmlspecialchars(
                         <table>
 
                             <thead>
-
                                 <tr>
                                     <th>Usuário</th>
                                     <th>E-mail</th>
                                     <th>Permissão</th>
                                     <th>Ação</th>
                                 </tr>
-
                             </thead>
 
                             <tbody id="usersTable"></tbody>
@@ -627,13 +593,8 @@ $csrf = htmlspecialchars(
                     </div>
 
                     <div>
-
                         <h3><?= $nome ?></h3>
-
-                        <p class="muted">
-                            Acesso administrativo
-                        </p>
-
+                        <p class="muted">Acesso administrativo</p>
                     </div>
 
                 </div>
