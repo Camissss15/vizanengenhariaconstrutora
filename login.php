@@ -1,38 +1,54 @@
-
 <?php
 declare(strict_types=1);
 
-session_start();
+require_once __DIR__ . "/config.php";
+require_once __DIR__ . "/auth.php";
 
-require_once "config.php";
+const LOGIN_MAX_FALHAS = 5;
+const LOGIN_BLOQUEIO_SEGUNDOS = 300;
 
-// Aceita somente requisições POST
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+function voltar_login(string $erro): void
+{
+    header("Location: vizanelogin.html?erro=" . $erro);
+    exit;
+}
+
+function registrar_falha(): void
+{
+    $_SESSION["login_falhas"] = (int) ($_SESSION["login_falhas"] ?? 0) + 1;
+
+    if ($_SESSION["login_falhas"] >= LOGIN_MAX_FALHAS) {
+        $_SESSION["login_bloqueio"] = time() + LOGIN_BLOQUEIO_SEGUNDOS;
+        $_SESSION["login_falhas"] = 0;
+    }
+
+    usleep(400000);
+    voltar_login("credenciais");
+}
+
+if (($_SERVER["REQUEST_METHOD"] ?? "") !== "POST") {
     header("Location: vizanelogin.html");
     exit;
 }
 
-// Recebe os dados enviados pelo formulário
-$login = trim($_POST["login"] ?? $_POST["usuario"] ?? "");
-$senha = $_POST["senha"] ?? "";
+if ((int) ($_SESSION["login_bloqueio"] ?? 0) > time()) {
+    voltar_login("bloqueado");
+}
 
-// Verifica se os campos foram preenchidos
+$login = trim((string) ($_POST["login"] ?? $_POST["usuario"] ?? ""));
+$senha = (string) ($_POST["senha"] ?? "");
+
 if ($login === "" || $senha === "") {
-    header("Location: vizanelogin.html?erro=preencha");
-    exit;
+    voltar_login("preencha");
 }
 
 try {
-    // Busca o usuário pelo nome ou e-mail
-    // Os parâmetros possuem nomes diferentes para evitar erro no PDO.
-    $sql = "
+    $stmt = $pdo->prepare("
         SELECT Idu, usuario, senhausu, emailusu
         FROM usuario
         WHERE usuario = :usuario OR emailusu = :email
         LIMIT 1
-    ";
-
-    $stmt = $pdo->prepare($sql);
+    ");
 
     $stmt->execute([
         "usuario" => $login,
@@ -41,59 +57,48 @@ try {
 
     $usuario = $stmt->fetch();
 
-    // Verifica se o usuário existe
     if (!$usuario) {
-        header("Location: vizanelogin.html?erro=credenciais");
-        exit;
+        registrar_falha();
     }
 
     $senhaBanco = (string) $usuario["senhausu"];
-
-    // Verifica se a senha armazenada já está criptografada
     $infoHash = password_get_info($senhaBanco);
 
     if (empty($infoHash["algo"])) {
-        // Senha antiga em texto simples: compara e atualiza para hash
         if (!hash_equals($senhaBanco, $senha)) {
-            header("Location: vizanelogin.html?erro=credenciais");
-            exit;
+            registrar_falha();
         }
 
-        $novaSenha = password_hash($senha, PASSWORD_DEFAULT);
-
-        $atualizar = $pdo->prepare("
-            UPDATE usuario
-            SET senhausu = :senha
-            WHERE Idu = :id
-        ");
+        $atualizar = $pdo->prepare(
+            "UPDATE usuario SET senhausu = :senha WHERE Idu = :id"
+        );
 
         $atualizar->execute([
-            "senha" => $novaSenha,
+            "senha" => password_hash($senha, PASSWORD_DEFAULT),
             "id" => $usuario["Idu"]
         ]);
 
-    } else {
-        // Senha já criptografada
-        if (!password_verify($senha, $senhaBanco)) {
-            header("Location: vizanelogin.html?erro=credenciais");
-            exit;
-        }
+    } elseif (!password_verify($senha, $senhaBanco)) {
+        registrar_falha();
     }
 
-    // Cria uma nova sessão após o login
     session_regenerate_id(true);
 
-    $_SESSION["usuario_id"] = $usuario["Idu"];
+    unset(
+        $_SESSION["login_falhas"],
+        $_SESSION["login_bloqueio"]
+    );
+
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+    $_SESSION["usuario_id"] = (int) $usuario["Idu"];
     $_SESSION["usuario_nome"] = $usuario["usuario"];
     $_SESSION["usuario_email"] = $usuario["emailusu"];
 
-    // Redireciona para o painel administrativo
     header("Location: dashboard.php");
     exit;
 
 } catch (PDOException $e) {
     error_log("Erro no login Vizan: " . $e->getMessage());
-
     http_response_code(500);
     exit("Ocorreu um erro ao realizar o login. Tente novamente.");
 }
